@@ -125,11 +125,13 @@ public class LambdaProves {
         );
 
         //frase más larga
-        toAnalize().lines()
-                .flatMap(line -> Stream.of(line.split("\\.")))
-                .map(character -> character.replaceAll("\\n", ""))
-                .forEach(System.out::println);
-
+        String[] split = toAnalize().lines()
+                .collect(Collectors.joining(" "))
+                .split("\\.");
+        
+        Arrays.stream(split)
+                .max(Comparator.comparingInt(String::length))
+                .ifPresent(x -> System.out.println("La frase mas larga: " + x));
 
         //cambiar cierta palabra
 //        toAnalize().lines()
